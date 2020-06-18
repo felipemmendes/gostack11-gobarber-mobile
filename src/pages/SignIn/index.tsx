@@ -33,8 +33,8 @@ import {
 } from './styles';
 
 interface SignInFormData {
-  signInEmail: string;
-  signInPassword: string;
+  email: string;
+  password: string;
 }
 
 const SignIn: React.FC = () => {
@@ -51,10 +51,10 @@ const SignIn: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          signInEmail: Yup.string()
+          email: Yup.string()
             .required('Digite seu e-mail')
             .email('Digite um e-mail válido'),
-          signInPassword: Yup.string().required('Digite sua senha'),
+          password: Yup.string().required('Digite sua senha'),
         });
 
         await schema.validate(data, {
@@ -62,8 +62,8 @@ const SignIn: React.FC = () => {
         });
 
         await signIn({
-          email: data.signInEmail,
-          password: data.signInPassword,
+          email: data.email,
+          password: data.password,
         });
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
@@ -101,7 +101,7 @@ const SignIn: React.FC = () => {
 
             <Form ref={formRef} onSubmit={handleSignIn}>
               <Input
-                name="signInEmail"
+                name="email"
                 icon="mail"
                 placeholder="E-mail"
                 autoCorrect={false}
@@ -114,7 +114,7 @@ const SignIn: React.FC = () => {
               />
               <Input
                 ref={passwordInputRef}
-                name="signInPassword"
+                name="password"
                 icon="lock"
                 placeholder="Senha"
                 secureTextEntry

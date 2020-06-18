@@ -26,9 +26,9 @@ import logoImg from '../../assets/logo.png';
 import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
 interface SignUpFormData {
-  signUpName: string;
-  signUpEmail: string;
-  signUpPassword: string;
+  name: string;
+  email: string;
+  password: string;
 }
 
 const SignUp: React.FC = () => {
@@ -43,11 +43,11 @@ const SignUp: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          signUpName: Yup.string().required('Digite seu nome completo'),
-          signUpEmail: Yup.string()
+          name: Yup.string().required('Digite seu nome completo'),
+          email: Yup.string()
             .required('Digite seu e-mail')
             .email('Digite um e-mail válido'),
-          signUpPassword: Yup.string().min(
+          password: Yup.string().min(
             6,
             'Digite uma senha com no mínimo 6 caracteres',
           ),
@@ -58,9 +58,9 @@ const SignUp: React.FC = () => {
         });
 
         await api.post('/users', {
-          name: data.signUpName,
-          email: data.signUpEmail,
-          password: data.signUpPassword,
+          name: data.name,
+          email: data.email,
+          password: data.password,
         });
 
         Alert.alert(
@@ -105,7 +105,7 @@ const SignUp: React.FC = () => {
 
             <Form ref={formRef} onSubmit={handleSignUp}>
               <Input
-                name="signUpName"
+                name="name"
                 icon="user"
                 placeholder="Nome"
                 autoCorrect={false}
@@ -117,7 +117,7 @@ const SignUp: React.FC = () => {
               />
               <Input
                 ref={emailInputRef}
-                name="signUpEmail"
+                name="email"
                 icon="mail"
                 placeholder="E-mail"
                 keyboardType="email-address"
@@ -130,7 +130,7 @@ const SignUp: React.FC = () => {
               />
               <Input
                 ref={passwordInputRef}
-                name="signUpPassword"
+                name="password"
                 icon="lock"
                 placeholder="Senha"
                 secureTextEntry
